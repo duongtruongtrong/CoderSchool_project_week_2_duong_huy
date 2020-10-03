@@ -168,11 +168,11 @@ def get_all_categories(categories,save_db=False):
 def add_col_categories():
     query_tolal_pages = """
         ALTER TABLE categories
-            ADD COLUMN tolal_pages INTEGER
+            ADD COLUMN total_pages INTEGER
     """
     query_tolal_products = """
         ALTER TABLE categories
-            ADD COLUMN tolal_products INTEGER
+            ADD COLUMN total_products INTEGER
     """
     try:
         cur.execute(query_tolal_pages)
