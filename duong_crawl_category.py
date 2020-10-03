@@ -4,7 +4,8 @@ import sqlite3
 import pandas as pd
 import re
 from time import sleep
-from random import randint
+from random import uniform
+
 
 TIKI_URL = 'https://tiki.vn'
 
@@ -89,7 +90,7 @@ class Category:
             cur.execute(query, val)
             conn.commit()
         except Exception as err:
-            print('ERROR BY INSERT:', err)
+            print('ERROR BY UPDATE:', err)
 
 def get_main_categories(save_db=False):
     """
@@ -101,8 +102,9 @@ def get_main_categories(save_db=False):
 
     result = []
     for a in soup.find_all('a', {'class': 'MenuItem__MenuLink-sc-181aa19-1 fKvTQu'}):
-        name = a.find('span', {'class': 'text'}).text
         url = a['href']
+
+        name = a.find('span', {'class': 'text'}).text
         main_cat = Category(name, url, level=1)
 
         if save_db == True:
@@ -129,19 +131,28 @@ def get_sub_categories(parent_category, save_db=False):
 
         # crawl data of sub_categories
         for div in div_containers:
+            sub_url = TIKI_URL + div.a['href']
+
             name = div.a.text
 
             # remove newline, spaces that appear > 2 times and numbers with parenthesis
-            name = re.sub('(\s{2,}|\n+|\(\d+\))', '', name)
+            name = re.sub(r'(\s{2,}|\n+|\(\d+\))', '', name)
 
-            sub_url = TIKI_URL + div.a['href']
-            
             cat = Category(name=name, url=sub_url, level=sub_level, parent_id=parent_id) # we now have parent_id, which is cat_id of parent category
+
+            # skip crawled categories, so the data in the DB won't be duplicated
             if save_db == True:
                 cat.save_into_db()
             result.append(cat)
+
+        # random sleep to ease Tiki server load -> pretend not to be a bot
+        sleep(uniform(1, 3))
+
     except Exception as err:
+        f = open('error_sub_cat.txt', 'w')
+        print(div, end='\n==============\n', file=f)
         print('ERROR BY GET SUB CATEGORIES:', err)
+        f.close()
     return result
 
 # get_all_categories() given a list of main categories (This is a recursion function)
@@ -151,8 +162,8 @@ def get_all_categories(categories,save_db=False):
     for cat in categories:
         sub_categories = get_sub_categories(cat, save_db=save_db)
         print(f'{cat.name} has {len(sub_categories)} sub-categories')
-        sleep(randint(2, 5))
-        get_all_categories(sub_categories)
+
+        get_all_categories(sub_categories, save_db=save_db)
 
 create_categories_table()
 # cur.execute('DROP TABLE categories;')
@@ -161,6 +172,9 @@ create_categories_table()
 main_categories = get_main_categories(save_db=True)
 
 get_all_categories(main_categories,save_db=True)
+
+# import os
+# os.system('shutdown /p /f')
 
 # df = pd.read_sql_query('''
 # select * from categories
