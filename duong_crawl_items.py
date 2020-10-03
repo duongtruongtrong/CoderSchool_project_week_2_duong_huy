@@ -73,17 +73,17 @@ def get_html(link):
     get_html(link)
     link: URL of the website, type: string
     """
-    try:
-        # get website data
-        r = requests.get(link)
+    # try:
+    # get website data
+    r = requests.get(link)
 
-        # turn website data text to HTML
-        soup = BeautifulSoup(r.text, 'html.parser')
+    # turn website data text to HTML
+    soup = BeautifulSoup(r.text, 'html.parser')
 
-        return soup
+    return soup
 
-    except Exception as err:
-        print('ERROR BY REQUEST:', err)
+    # except Exception as err:
+    #     print('ERROR BY REQUEST:', err)
 
 class Product:
     """ Use to store and save to DB all product items in 1 category.
@@ -257,11 +257,30 @@ for cat_link, cat_id, cat_pages, cat_products in zip(df_category_url_list, df_ca
         
         # get HTML from tiki_link + page_number
         # f'https://tiki.vn/tivi/c5015?src=c.5015.hamburger_menu_fly_out_banner&page={page_number}'
-        full_html = get_html(tiki_link + str(page_number))
+        try:
+            full_html = get_html(tiki_link + str(page_number))
 
-        # get item list from full_html
-        item_list = get_item_list(full_html)
-        number_of_product = len(item_list)
+            # get item list from full_html
+            item_list = get_item_list(full_html)
+            number_of_product = len(item_list)
+        except:
+            # if connection is interupted, wait 10 seconds and try again
+            sleep(10)
+            try:
+                full_html = get_html(tiki_link + str(page_number))
+                # get item list from full_html
+            
+                # if still got interupted move next page
+                item_list = get_item_list(full_html)
+                number_of_product = len(item_list)
+            except:
+                if page_number <= 20:
+                    number_of_product = 1
+                    page_number+=1
+                else:
+                    number_of_product = 0
+                continue
+
 
         # if there is not produc in item list, it means it reach the last page.
         if number_of_product > 0:
@@ -300,7 +319,7 @@ for cat_link, cat_id, cat_pages, cat_products in zip(df_category_url_list, df_ca
 
         page_number+=1
 
-        sleep(uniform(1, 2))
+        sleep(uniform(1.5, 2.5))
 
 print('Finish crawling!')
 
