@@ -267,7 +267,7 @@ for cat_link, cat_id, cat_pages, cat_products in zip(df_category_url_list, df_ca
         if number_of_product > 0:
 
             # product count
-            cat_products = 0
+            n = 0
 
             # get all uncrawled category
             df_product = pd.read_sql_query(f'''
