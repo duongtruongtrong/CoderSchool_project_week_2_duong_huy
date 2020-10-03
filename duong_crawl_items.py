@@ -147,7 +147,7 @@ def get_item_list(full_webpage_html):
 
     return item_list
 
-def get_data(item_html):
+def get_data(item_html, crawled_url_list):
     """Get data from item_list HTML for selected data_col list.
     Return Product class object -> easier to insert to tables
 
@@ -157,50 +157,58 @@ def get_data(item_html):
     item_html: HTML of each item in item_list, type: string
     """
 
-    
-    # get general_info
-    product_id = int(item_html['data-seller-product-id'])
-    product_sku = int(item_html['product-sku'])
-    product_name = item_html['data-title']
-    current_price = int(item_html['data-price'])
-    data_id = int(item_html['data-id'])
-    product_brand = item_html['data-brand']
-
-    # get links
     product_link = 'https://tiki.vn/' + item_html.a['href']
-    product_image_link = item_html.a.img['src']
 
-    # get price
-    try:
-        original_price = item_html.find('span', {'class':'price-regular'}).text
-        original_price = int(re.sub(r'\.|đ', '', original_price))
+    # check if this item was crawled before or not
+    if len(crawled_url_list) == 0 or product_link not in crawled_url_list:
 
-        discount_pct = item_html.find('span', {'class':'sale-tag sale-tag-square'}).text
-        discount_pct = float(re.sub(r'-|%', '', discount_pct))
-    except:
-        original_price = current_price
-        discount_pct = 0
+        # get general_info
+        product_id = int(item_html['data-seller-product-id'])
+        product_sku = int(item_html['product-sku'])
+        product_name = item_html['data-title']
+        current_price = int(item_html['data-price'])
+        data_id = int(item_html['data-id'])
+        product_brand = item_html['data-brand']
 
-    # get number_of_reviews
-    try:
-        rating_section = item_html.find('div', {'class':'review-wrap'})
-    
-        number_of_reviews = rating_section.find('p', {'class':'review'}).text
-        number_of_reviews = int(re.sub(r'\(| nhận xét\)', '', number_of_reviews))
-    except:
-        number_of_reviews = 0
+        # get links
+        product_link = 'https://tiki.vn/' + item_html.a['href']
+        product_image_link = item_html.a.img['src']
 
-    # getting to rating_pct
-    try:
-        p_rating = rating_section.find('p', {'class':'rating'})
-        span_rating = p_rating.find('span', {'class':'rating-content'})
+        # get price
+        try:
+            original_price = item_html.find('span', {'class':'price-regular'}).text
+            original_price = int(re.sub(r'\.|đ', '', original_price))
+
+            discount_pct = item_html.find('span', {'class':'sale-tag sale-tag-square'}).text
+            discount_pct = float(re.sub(r'-|%', '', discount_pct))
+        except:
+            original_price = current_price
+            discount_pct = 0
+
+        # get number_of_reviews
+        try:
+            rating_section = item_html.find('div', {'class':'review-wrap'})
         
-        rating_pct = span_rating.span['style']
-        rating_pct = float(re.sub(r'width:|%', '', rating_pct))
-    except:
-        rating_pct = 0
+            number_of_reviews = rating_section.find('p', {'class':'review'}).text
+            number_of_reviews = int(re.sub(r'\(| nhận xét\)', '', number_of_reviews))
+        except:
+            number_of_reviews = 0
 
-    result = Product(product_id, product_sku, product_name, current_price, data_id, product_brand, product_link, product_image_link, original_price, discount_pct, rating_pct, number_of_reviews)
+        # getting to rating_pct
+        try:
+            p_rating = rating_section.find('p', {'class':'rating'})
+            span_rating = p_rating.find('span', {'class':'rating-content'})
+            
+            rating_pct = span_rating.span['style']
+            rating_pct = float(re.sub(r'width:|%', '', rating_pct))
+        except:
+            rating_pct = 0
+
+        result = Product(product_id, product_sku, product_name, current_price, data_id, product_brand, product_link, product_image_link, original_price, discount_pct, rating_pct, number_of_reviews)
+
+    else:
+        # if this item was crawled before, return 'crawled' to stop next steps.
+        result = 'crawled'
 
     return result
 
@@ -209,19 +217,38 @@ create_products_table()
 # cur.execute('DROP TABLE tiki_products;')
 # conn.commit()
 
+# get all uncrawled category
 df_category = pd.read_sql_query('''
 select * from categories
 where total_sub_category = 0
+and total_pages is null
 ''', conn)
+
+# get the last category was crawled
+df_category_crawled = pd.read_sql_query('''
+select * from categories
+where total_sub_category = 0
+and total_pages is not null
+order by id desc
+limit 1
+''', conn)
+
+df_category = pd.concat([df_category_crawled, df_category], sort=False)
 
 df_category_url_list = df_category['url'].tolist()
 df_category_id_list = df_category['id'].tolist()
+df_category_total_pages_list = df_category['total_pages'].tolist()
+df_category_total_products_list = df_category['total_products'].tolist()
 
-for cat_link, cat_id in zip(df_category_url_list, df_category_id_list):
+for cat_link, cat_id, cat_pages, cat_products in zip(df_category_url_list, df_category_id_list, df_category_total_pages_list, df_category_total_products_list):
 
     number_of_product = 1
 
-    page_number = 1
+    # continue the last page to check if all product was crawled or not
+    if cat_pages == None or cat_pages == 0:
+        page_number = 1
+    else:
+        page_number = cat_pages
 
     # tiki link without page number
     tiki_link = cat_link + '&page='
@@ -239,21 +266,37 @@ for cat_link, cat_id in zip(df_category_url_list, df_category_id_list):
         # if there is not produc in item list, it means it reach the last page.
         if number_of_product > 0:
 
-            n = 1
+            # product count
+            cat_products = 0
+
+            # get all uncrawled category
+            df_product = pd.read_sql_query(f'''
+            select product_link from tiki_products
+            where category_id = {cat_id}
+            ''', conn)
+
+            crawled_url_list = df_product['product_link'].tolist()
 
             # get all the data
             for item_html in item_list:
-                output_object = get_data(item_html)
-
-                output_object.category_id = cat_id
-                output_object.page = page_number
-                output_object.item_position = n
+                output_object = get_data(item_html, crawled_url_list)
                 
-                output_object.save_into_db()
-                n+=1
+                if output_object != 'crawled':
 
-            print(f'Category ID: {cat_id}. Finish crawling page {page_number} with {number_of_product} products')
-            update_total_pages_products_categories(cat_id, page_number, number_of_product)
+                    output_object.category_id = cat_id
+                    output_object.page = page_number
+                    output_object.item_position = n+1
+                    
+                    output_object.save_into_db()
+                    n+=1
+
+            print(f'Category ID: {cat_id}. Finish crawling page {page_number} with {n} products')
+            if n != 0:
+                if cat_products == None:
+                    cat_products = 0
+                # continue adding number of products
+                cat_products+=n
+                update_total_pages_products_categories(cat_id, page_number, cat_products)
 
         page_number+=1
 
