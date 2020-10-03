@@ -150,7 +150,7 @@ def get_sub_categories(parent_category, save_db=False):
 
     except Exception as err:
         f = open('error_sub_cat.txt', 'w')
-        print(div, end='\n==============\n', file=f)
+        print(parent_url, end='\n==============\n', file=f)
         print('ERROR BY GET SUB CATEGORIES:', err)
         f.close()
     return result
