@@ -253,7 +253,7 @@ for cat_link, cat_id in zip(df_category_url_list, df_category_id_list):
                 n+=1
 
             print(f'Category ID: {cat_id}. Finish crawling page {page_number} with {number_of_product} products')
-            # update_total_pages_products_categories(cat_id, page_number, number_of_product)
+            update_total_pages_products_categories(cat_id, page_number, number_of_product)
 
         page_number+=1
 
