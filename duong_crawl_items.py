@@ -303,3 +303,6 @@ for cat_link, cat_id, cat_pages, cat_products in zip(df_category_url_list, df_ca
         sleep(uniform(1, 2))
 
 print('Finish crawling!')
+
+import os
+os.system('shutdown /p /f')
