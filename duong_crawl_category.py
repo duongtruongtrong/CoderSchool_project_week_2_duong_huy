@@ -165,6 +165,22 @@ def get_all_categories(categories,save_db=False):
 
         get_all_categories(sub_categories, save_db=save_db)
 
+def add_col_categories():
+    query_tolal_pages = """
+        ALTER TABLE categories
+            ADD COLUMN tolal_pages INTEGER
+    """
+    query_tolal_products = """
+        ALTER TABLE categories
+            ADD COLUMN tolal_products INTEGER
+    """
+    try:
+        cur.execute(query_tolal_pages)
+        cur.execute(query_tolal_products)
+        conn.commit()
+    except Exception as err:
+        print('ERROR BY CREATE TABLE', err)
+
 create_categories_table()
 # cur.execute('DROP TABLE categories;')
 # conn.commit()
@@ -172,6 +188,8 @@ create_categories_table()
 main_categories = get_main_categories(save_db=True)
 
 get_all_categories(main_categories,save_db=True)
+
+add_col_categories()
 
 # import os
 # os.system('shutdown /p /f')
