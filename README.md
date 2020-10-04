@@ -67,7 +67,7 @@ It took more than **4 hours** to finish crawling all categories urls.
 Big number of sub categories of "Homes for Life" (Nhà Cửa Đời Sống) is due to the big number of products.
 ![image](https://user-images.githubusercontent.com/71629218/95012554-bef22000-0663-11eb-8a14-ac77b8be3795.png)
 
-### Interesting findout
+### Interesting findings
 **Top 10 Sub Categories with highest number of products**
 
 Number of products of each category usually reachs the **maximum of 1000**. Tiki database contains more than that, but not showing on the website.
@@ -83,3 +83,12 @@ All products in those 3 categories are **only duplicated** because Tiki place th
 ### B. Products:
 It took more than **19 hours**  to finish crawling all products in all categories.
 
+**Product position on a page vs Discount rate**
+
+Position number **7, 17, 27, 37, 47** usually do not have **discount range of 40-60%**. Popular discount percentage: 10, 20, 30, 40, 50.
+![image](https://user-images.githubusercontent.com/71629218/95015867-a7be2d00-0679-11eb-80b4-23a3369acd80.png)
+
+**Product page number vs Discount rate**
+
+Discounted products are mostly placed on **page 1 to page 6**. After page 6, the number of discounted products starts decreasing.
+![image](https://user-images.githubusercontent.com/71629218/95015923-f10e7c80-0679-11eb-8914-4a9eb2dcaeab.png)
