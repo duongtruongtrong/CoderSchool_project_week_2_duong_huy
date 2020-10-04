@@ -1,18 +1,59 @@
-# project_week_2_duong_huy
-# OBJECTIVE: build a web crawler that crawl 10 pages from each category in Tiki and store the data in the SQLITE
-## 3 steps to achieve the target:
-###
+# OBJECTIVE: build a web crawler that crawl all pages from each category in Tiki and store the data in the SQLite.
+
+## 1. Files:
+- duong_crawl_category.py: Get all categories.
+- duong_crawl_items.py: Get all items in all crawled categories.
+- tiki.db
+- tiki_cat.xlsx
+- tiki_products.xlsx
+
+## 2. Steps to achieve the target:
+
 * **Step 1:** Create a SQLite database 
-    - **Create table categories in the database using a function**
-        - ![image](https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/120374473_802224490580735_9180431419013507570_n.png?_nc_cat=106&_nc_sid=ae9488&_nc_ohc=J0FEA3AKGOQAX-_iDQ7&_nc_ht=scontent.fvca1-1.fna&oh=558e8baf9266c660c73c45462738e702&oe=5F9F91ED)
-    - **Create tables to store your data (using OOP).**
-        - ![image](https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/120408810_368931617481902_4783010203367506995_n.png?_nc_cat=106&_nc_sid=ae9488&_nc_ohc=gwM9fynXJWsAX-Jolho&_nc_oc=AQnp9DHYz0cbXGNaXBXtGyhTNP5ezlpqttsTszSIy9X9gKeRL13W1L86L44wT8XJPDU&_nc_ht=scontent.fvca1-1.fna&oh=502808f7680033a54c6d5cc1778743e8&oe=5F9F978E)
-* **Step 2:** Make a function to crawl the link of the categories and return a list of category URLs.
-    - **Get main categories**
-        - ![image](https://scontent.fvca1-2.fna.fbcdn.net/v/t1.15752-9/120467874_3392052234220383_4456734011941116404_n.png?_nc_cat=100&_nc_sid=ae9488&_nc_ohc=B3djkERTWToAX9S0OP2&_nc_ht=scontent.fvca1-2.fna&oh=37bc7821e286bb514b9fd677fc7305fb&oe=5F9FEACA)
-    - **Get sub categories**
-        - ![image](https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/120746264_627959471215965_8530475285572795709_n.png?_nc_cat=103&_nc_sid=ae9488&_nc_ohc=6LZXAz-Htm8AX_4bW3x&_nc_ht=scontent.fvca1-1.fna&oh=c40fd488d0e6a59006a9806aca7bf18c&oe=5F9CE0C8)
-    - **Get all categories**
-        - ![image](https://scontent.fvca1-1.fna.fbcdn.net/v/t1.15752-9/120553800_702208290374701_4086598671036702406_n.png?_nc_cat=106&_nc_sid=ae9488&_nc_ohc=Ow_MkPjDneYAX-9WnvA&_nc_ht=scontent.fvca1-1.fna&oh=e8fc396b7fb6eb71ffa9ea51eac1dea1&oe=5F9C7F28)
-* **Step 3:** Use the data from your database to make analysis about Tiki
-## Extra steps:
+    - **Create table "categories" in the database**
+    
+    Columns:
+    - id
+    - name
+    - url
+    - **level**: Level of the category in the category tree. Level 1 = the main categories.
+    - **total_sub_category**: Total of sub categories that the category contain. 0 = the category does not have any sub category.
+    - parent_id
+    - created_at
+    
+    ![image](https://user-images.githubusercontent.com/71629218/95008136-48442b00-0641-11eb-8b29-53b4a0ddb9e9.png)
+
+    - **Use ODP to temporauily store, create save_to_db method using "INSERT" and update_total_sub_category using "UPDATE"**
+        - **save_to_db**: Save every category to table categories as 1 row.
+        - **update_total_sub_category**: Update total_sub_category of every parent category in table categories.
+    
+    ![image](https://user-images.githubusercontent.com/71629218/95008161-79246000-0641-11eb-925a-76c28361276b.png)
+
+* **Step 2:** Crawl the link of the sub categories and return a list of last sub-categories.
+    - **Get main categories:** The categories on tiki.vn homepage
+    
+    ![image](https://user-images.githubusercontent.com/71629218/95008206-fd76e300-0641-11eb-9eae-61fab8263cd8.png)
+
+    - **Get sub categories:** Assign level of the sub category (= parent_level + 1) and update total_sub_category of the direct parent category.
+    
+    ![image](https://user-images.githubusercontent.com/71629218/95008228-25664680-0642-11eb-936d-32c2af0a68ad.png)
+        
+    - **Get all categories:** Only the last sub-categories (category with total_sub_category = 0) are used for crawling items.
+    
+    ![image](https://user-images.githubusercontent.com/71629218/95008235-4038bb00-0642-11eb-9c22-530efd3d32a2.png)
+
+* **Step 3:** Crawl all items in each last sub-categories (category with total_sub_category = 0) and save each item to table **tiki_products** in SQLite database.
+
+**Extra features**: Continue where the script left when interupted:
+- Continue to crawl the next item in a page;
+- Or continue the next page;
+- Or continue the next category.
+
+## 3. Data Analysis:
+### A. Categories:
+**Total Sub Categories in each Main Categories**
+Homes for Life (Nhà Cửa Đời Sống) has the most number of sub categories: 600 sub categories.
+![image](https://user-images.githubusercontent.com/71629218/95008402-db7e6000-0643-11eb-8164-b2cb97d5259c.png)
+
+### B. Products:
+
