@@ -44,10 +44,13 @@
 
 * **Step 3:** Crawl all items in each last sub-categories (category with total_sub_category = 0) and save each item to table **tiki_products** in SQLite database.
 
-**Extra features**: Continue where the script left when interupted:
-- Continue to crawl the next item in a page;
-- Or continue the next page;
-- Or continue the next category.
+    Similar to Week 1 project with some updates:
+    - Use class "Product" (ODP) to temporily save product values from HTML, instead of a dictionary.
+    - Save items to SQLite database, instead of a dataframe and a excel file.
+    - **Extra features**: Continue crawling where the script left when interupted by using SQLite database (catgories and tiki_products tables) as backup source, instead of a excel file.
+        - Continue to crawl the next item in a page;
+        - Or continue the next page;
+        - Or continue the next category.
 
 ## 3. Data Analysis:
 ### A. Categories:
