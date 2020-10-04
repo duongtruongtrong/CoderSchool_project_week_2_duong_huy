@@ -51,6 +51,8 @@
 
 ## 3. Data Analysis:
 ### A. Categories:
+It took more than **4 hours** to finish crawling all categories urls.
+
 **Total Sub Categories in each Main Categories**
 
 "Homes for Life" (Nhà Cửa Đời Sống) has the biggest number of sub categories: 600 sub categories.
@@ -60,7 +62,6 @@
 
 Big number of sub categories of "Homes for Life" (Nhà Cửa Đời Sống) is due to the big number of products.
 ![image](https://user-images.githubusercontent.com/71629218/95008580-509e6500-0645-11eb-9070-58cb89743356.png)
-
 ### Interesting findout
 **Top 10 Sub Categories with highest number of products**
 
@@ -72,8 +73,8 @@ However, there are **3 categories breaks the rule**: "Bộ chăn ga, ra, drap" (
 
 All products in those 3 categories are **only duplicated** because Tiki place the **same product in different places** with the product links are also different.
 
-![image](https://user-images.githubusercontent.com/71629218/95008927-0a96d080-0648-11eb-8f03-e4edaede13a6.png)
-
+![image](https://user-images.githubusercontent.com/71629218/95008927-0a96d080-0648-11eb-8f03-e4edaede13a6.png) ![image](https://user-images.githubusercontent.com/71629218/95009341-847c8900-064b-11eb-8c60-77734cb2fb3a.png)
 
 ### B. Products:
+It took more than **18 hours**  to finish crawling all products in all categories.
 
