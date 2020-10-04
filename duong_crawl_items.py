@@ -151,7 +151,7 @@ def get_data(item_html, crawled_url_list):
     """Get data from item_list HTML for selected data_col list.
     Return Product class object -> easier to insert to tables
 
-    If error when crawling, skip it.
+    If error when crawling any attribute, give that attribute 0 (if integer) or None (if string).
 
     get_data(item_html)
     item_html: HTML of each item in item_list, type: string
@@ -163,11 +163,28 @@ def get_data(item_html, crawled_url_list):
     if len(crawled_url_list) == 0 or product_link not in crawled_url_list:
 
         # get general_info
-        product_id = int(item_html['data-seller-product-id'])
-        product_sku = int(item_html['product-sku'])
+        try:
+            product_id = int(item_html['data-seller-product-id'])
+        except:
+            product_id = 0
+        
+        try:
+            product_sku = int(item_html['product-sku'])
+        except:
+            product_sku = 0
+        
         product_name = item_html['data-title']
-        current_price = int(item_html['data-price'])
-        data_id = int(item_html['data-id'])
+
+        try:
+            current_price = int(item_html['data-price'])
+        except:
+            current_price = 0
+        
+        try:
+            data_id = int(item_html['data-id'])
+        except:
+            data_id = 0
+
         product_brand = item_html['data-brand']
 
         # get links
