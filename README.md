@@ -52,8 +52,13 @@
 ## 3. Data Analysis:
 ### A. Categories:
 **Total Sub Categories in each Main Categories**
-Homes for Life (Nhà Cửa Đời Sống) has the most number of sub categories: 600 sub categories.
+
+Homes for Life (Nhà Cửa Đời Sống) has the biggest number of sub categories: 600 sub categories.
 ![image](https://user-images.githubusercontent.com/71629218/95008402-db7e6000-0643-11eb-8164-b2cb97d5259c.png)
+
+Homes for Life (Nhà Cửa Đời Sống) also has the largest number of products.
+![image](https://user-images.githubusercontent.com/71629218/95008580-509e6500-0645-11eb-9070-58cb89743356.png)
+
 
 ### B. Products:
 
