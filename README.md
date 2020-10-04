@@ -28,7 +28,7 @@
     
     ![image](https://user-images.githubusercontent.com/71629218/95008136-48442b00-0641-11eb-8b29-53b4a0ddb9e9.png)
 
-    - **Use ODP to temporauily store, create save_to_db method using "INSERT" and update_total_sub_category using "UPDATE"**
+    - **Use ODP to temporarily store, create save_to_db method using "INSERT" and update_total_sub_category using "UPDATE"**
         - **save_to_db**: Save every category to table categories as 1 row.
         - **update_total_sub_category**: Update total_sub_category of every parent category in table categories.
     
