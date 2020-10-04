@@ -65,7 +65,8 @@ It took more than **4 hours** to finish crawling all categories urls.
 **Total Products in each Main Categories**
 
 Big number of sub categories of "Homes for Life" (Nhà Cửa Đời Sống) is due to the big number of products.
-![image](https://user-images.githubusercontent.com/71629218/95008580-509e6500-0645-11eb-9070-58cb89743356.png)
+![image](https://user-images.githubusercontent.com/71629218/95012554-bef22000-0663-11eb-8a14-ac77b8be3795.png)
+
 ### Interesting findout
 **Top 10 Sub Categories with highest number of products**
 
