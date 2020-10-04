@@ -1,14 +1,18 @@
 # OBJECTIVE: build a web crawler that crawl all pages from each category in Tiki and store the data in the SQLite.
 
 ## 1. Files:
-- duong_crawl_category.py: Get all categories.
-- duong_crawl_items.py: Get all items in all crawled categories.
-- tiki.db
-- tiki_cat.xlsx
-- tiki_products.xlsx
-- duong_analysis.ipynb
+- **duong_crawl_category.py**: Get all categories.
+- **duong_crawl_items.py**: Get all items in all crawled categories.
+- **tiki_db.rar**: Contain tiki.db because GitHub does not allow pushing file with >100MB on repository.
+- **tiki_cat.xlsx**: Categories table as an excel file.
+- **tiki_products.xlsx**: Sample records from tiki_products table.
+- duong_analysis.ipynb: Some charts.
 
-## 2. Steps to achieve the target:
+## 2. Results:
+- 3,191 categories.
+- 708,133 products.
+
+## 3. Steps to achieve the target:
 
 * **Step 1:** Create a SQLite database 
     - **Create table "categories" in the database**
@@ -53,7 +57,7 @@
         - Or continue the next page;
         - Or continue the next category.
 
-## 3. Data Analysis:
+## 4. Data Analysis:
 ### A. Categories:
 It took more than **4 hours** to finish crawling all categories urls.
 
