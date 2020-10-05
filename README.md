@@ -93,7 +93,7 @@ Unit: 10,000,000 VND (10 million VND)
 
 Price after discount.
 
-Electronics (Điện tử - điện lạnh) has the highest average price, over 10 milliong VND.
+Electronics (Điện tử - điện lạnh) has the highest average price, over 10 million VND.
 ![image](https://user-images.githubusercontent.com/71629218/95033177-72502880-06e7-11eb-8ac2-1f204e5a99eb.png)
 
 **Highes price**: Harley Davidson FXDRS 2019 (Xe Mô Tô Harley Davidson FXDRS - 2019) - 799,500,000 VND
