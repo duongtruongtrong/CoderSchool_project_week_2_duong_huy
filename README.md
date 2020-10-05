@@ -98,7 +98,7 @@ Electronics (Điện tử - điện lạnh) has the highest average price, over 
 
 **Highes price**: Harley Davidson FXDRS 2019 (Xe Mô Tô Harley Davidson FXDRS - 2019) - 799,500,000 VND
 
-**0 VND price**: Box of 10 Volluto Coffee Capsule Capsules - Nespresso (Hộp 10 Viên Nén Capsule Cà Phê Volluto - Nespresso) **due to out of stock**
+**A sample of 0 VND price**: Box of 10 Volluto Coffee Capsule Capsules - Nespresso (Hộp 10 Viên Nén Capsule Cà Phê Volluto - Nespresso) **due to out of stock**
 
 **Lowest price**: Zinc Branches (Kẽm Cành) - 1,920 VND
 
