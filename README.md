@@ -21,8 +21,8 @@
     - id
     - name
     - url
-    - **level**: Level of the category in the category tree. Level 1 = the main categories.
-    - **total_sub_category**: Total of sub categories that the category contain. 0 = the category does not have any sub category.
+    - **level**: Level of the category in the category tree. Level 1 = the main categories. 
+    - **total_sub_category**: Total of sub categories that the category contain. **Purpose:** 0 = the category does not have any sub category.
     - parent_id
     - created_at
     
