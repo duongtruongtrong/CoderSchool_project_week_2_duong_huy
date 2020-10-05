@@ -10,7 +10,7 @@
 
 ## 2. Results:
 - 3,191 categories.
-- 708,133 products.
+- 708,133 products: All products that can be crawled from Tiki website.
 
 ## 3. Steps to achieve the target:
 
@@ -96,7 +96,7 @@ Price after discount.
 Electronics (Điện tử - điện lạnh) has the highest average price, over 10 million VND.
 ![image](https://user-images.githubusercontent.com/71629218/95033177-72502880-06e7-11eb-8ac2-1f204e5a99eb.png)
 
-**Highes price**: Harley Davidson FXDRS 2019 (Xe Mô Tô Harley Davidson FXDRS - 2019) - 799,500,000 VND
+**Highest price**: Harley Davidson FXDRS 2019 (Xe Mô Tô Harley Davidson FXDRS - 2019) - 799,500,000 VND
 
 **A sample of 0 VND price**: Box of 10 Volluto Coffee Capsule Capsules - Nespresso (Hộp 10 Viên Nén Capsule Cà Phê Volluto - Nespresso) **due to out of stock**
 
