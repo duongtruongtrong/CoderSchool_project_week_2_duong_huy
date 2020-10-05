@@ -28,7 +28,7 @@
     
     ![image](https://user-images.githubusercontent.com/71629218/95008136-48442b00-0641-11eb-8b29-53b4a0ddb9e9.png)
 
-    - **Use ODP to temporarily store, create save_to_db method using "INSERT" and update_total_sub_category using "UPDATE"**
+    - **Use OOP to temporarily store, create save_to_db method using "INSERT" and update_total_sub_category using "UPDATE"**
         - **save_to_db**: Save every category to table categories as 1 row.
         - **update_total_sub_category**: Update total_sub_category of every parent category in table categories.
     
@@ -50,7 +50,7 @@
 * **Step 3:** Crawl all items in each last sub-categories (category with total_sub_category = 0) and save each item to table **tiki_products** in SQLite database.
 
     Similar to Week 1 project with some updates:
-    - Use class "Product" (ODP) to temporily save product values from HTML, instead of a dictionary.
+    - Use class "Product" (OOP) to temporily save product values from HTML, instead of a dictionary.
     - Save items to SQLite database, instead of a dataframe and a excel file.
     - **Extra features**: Continue crawling where the script left when interupted by using SQLite database (catgories and tiki_products tables) as backup source, instead of a excel file.
         - Continue to crawl the next item in a page;
