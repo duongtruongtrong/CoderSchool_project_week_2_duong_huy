@@ -84,6 +84,8 @@ All products in those 3 categories are **only duplicated** because Tiki place th
 
 ![image](https://user-images.githubusercontent.com/71629218/95008927-0a96d080-0648-11eb-8f03-e4edaede13a6.png) ![image](https://user-images.githubusercontent.com/71629218/95009341-847c8900-064b-11eb-8c60-77734cb2fb3a.png)
 
+700k products on the website may be only **10% of products in Tiki database**.
+
 ### B. Products:
 It took more than **19 hours**  to finish crawling all products in all categories.
 
