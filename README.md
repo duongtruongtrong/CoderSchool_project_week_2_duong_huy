@@ -103,7 +103,7 @@ Electronics (Điện tử - điện lạnh) has the highest average price, over 
 **Lowest price**: Zinc Branches (Kẽm Cành) - 1,920 VND
 
 ### Intersting Findings
-**Product position on a page vs Discount rate** (only consiering products having discount rate > 0%)
+**Product position on a page vs Discount rate** (only considering products having discount rate > 0%)
 
 Position number **7, 17, 27, 37, 47** usually do not have **discount range of 40-60%**. Popular discount percentage: 10, 20, 30, 40, 50.
 ![image](https://user-images.githubusercontent.com/71629218/95015867-a7be2d00-0679-11eb-80b4-23a3369acd80.png)
