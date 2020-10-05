@@ -61,18 +61,18 @@
 ### A. Categories:
 It took more than **4 hours** to finish crawling all categories urls.
 
-**Total Sub Categories in each Main Categories**
+**Total sub categories in each main categories**
 
 "Homes for Life" (Nhà Cửa Đời Sống) has the biggest number of sub categories: 600 sub categories.
 ![image](https://user-images.githubusercontent.com/71629218/95008402-db7e6000-0643-11eb-8164-b2cb97d5259c.png)
 
-**Total Products in each Main Categories**
+**Total products in each main categories**
 
 Big number of sub categories of "Homes for Life" (Nhà Cửa Đời Sống) is due to the big number of products.
 ![image](https://user-images.githubusercontent.com/71629218/95012554-bef22000-0663-11eb-8a14-ac77b8be3795.png)
 
 ### Interesting findings
-**Top 10 Sub Categories with highest number of products**
+**Top 10 sub categories with highest number of products**
 
 Number of products of each category usually reachs the **maximum of 1000**. Tiki database contains more than that, but not showing on the website.
 
@@ -87,12 +87,28 @@ All products in those 3 categories are **only duplicated** because Tiki place th
 ### B. Products:
 It took more than **19 hours**  to finish crawling all products in all categories.
 
-**Product position on a page vs Discount rate**
+**Average current price of each main categories**
+
+Unit: 10,000,000 VND (10 million VND)
+
+Price after discount.
+
+Electronics (Điện tử - điện lạnh) has the highest average price, over 10 milliong VND.
+![image](https://user-images.githubusercontent.com/71629218/95033177-72502880-06e7-11eb-8ac2-1f204e5a99eb.png)
+
+**Highes price**: Harley Davidson FXDRS 2019 (Xe Mô Tô Harley Davidson FXDRS - 2019) - 799,500,000 VND
+
+**0 VND price**: Box of 10 Volluto Coffee Capsule Capsules - Nespresso (Hộp 10 Viên Nén Capsule Cà Phê Volluto - Nespresso) **due to out of stock**
+
+**Lowest price**: Zinc Branches (Kẽm Cành) - 1,920 VND
+
+### Intersting Findings
+**Product position on a page vs Discount rate** (only consiering products having discount rate > 0%)
 
 Position number **7, 17, 27, 37, 47** usually do not have **discount range of 40-60%**. Popular discount percentage: 10, 20, 30, 40, 50.
 ![image](https://user-images.githubusercontent.com/71629218/95015867-a7be2d00-0679-11eb-80b4-23a3369acd80.png)
 
-**Product page number vs Discount rate**
+**Product page number vs Discount rate** (only consiering products having discount rate > 0%)
 
 Discounted products are mostly placed on **page 1 to page 6**. After page 6, the number of discounted products starts decreasing.
 ![image](https://user-images.githubusercontent.com/71629218/95015923-f10e7c80-0679-11eb-8914-4a9eb2dcaeab.png)
